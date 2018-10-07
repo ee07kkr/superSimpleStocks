@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#Ticker Price check needs to be done here
 """
 Created on Thu Oct  4 23:35:50 2018
 @desc: main source code that calls the base class stock
@@ -14,6 +13,7 @@ from ssstock_class import stock
 stock_list = {}
 # function that provides stock analysis data
 def stock_analysis(stockname):
+    cnt_sa = 0
     while True:
         try:
             tickp = float(input('Enter a ticker price in pennies or 999 to use average stock Price of last 15mins trade:  \n'))
@@ -21,7 +21,12 @@ def stock_analysis(stockname):
                 tickp = float(stock_list[stockname].stock_price_cal())
         except:
             print("We need a ticker price that is floating or integer datatype.\n")
-            continue
+            cnt_sa += 1
+            if cnt_sa > 3:
+                print('Wrong entries being provided.....exiting!\n')
+                break
+            else:
+                continue
         else:
             print('Dividend Yield for ticker {a} is:  {b} \n'.format(a=stock_list[stockname].ticker, b=stock_list[stockname].dividend_yield(tickp)))
             print('P/E ratio of the ticker {c} is:  {d} \n'.format(c=stock_list[stockname].ticker, d=stock_list[stockname].pe_ratio(tickp)))
@@ -29,6 +34,7 @@ def stock_analysis(stockname):
             break
 # function to manually enter trade details - if no csv file can be provided.
 def trade_entry(stockname):
+    cnt_te = 0
     while True:
         try:
             trade_details = str(input("Comma-seperated details in following order: \
@@ -41,7 +47,12 @@ def trade_entry(stockname):
         except:
             print("Make sure the order is shares,tradetype, price, timestamp -as a string in format YYYY-mm-dd HH:MM:SS\n")
             print("Do not put a comma after price if timestamp is not being provided\n")
-            continue
+            cnt_te += 1
+            if cnt_te > 3:
+                print('Wrong entries being provided.....exiting!\n')
+                break
+            else:
+                continue
         else:
             break
 #function to automatically enter multiple trades for ticker whose stock object exists
@@ -80,11 +91,11 @@ def calc_index():
         print("GBCE All Share Index value is {q}\n".format(q=index_price**(1/count)))
         return index_price**(1/count)
     else:
-        print("Not enough data to calculate GBCE All Share index")
+        print("Not enough data to calculate GBCE All Share index\n")
 #function to manually create new stock object
 def add_new_stock():
     new_stock_detail = str(input("Please enter a comma-seperated stock details in following order: \
-                                Ticker Name, Common/Preferred, Last Dividend, Fix Dividend (type None or none for common stock),Par Value)\n"))
+                                Ticker Name, Common/Preferred, Last Dividend, Fix Dividend (options - x%,none,None,leave blank),Par Value)\n"))
     new_stock_data = [item for item in new_stock_detail.split(',')]
     stock_list[new_stock_data[0]] = stock(*new_stock_data)
     more_new_stocks = str(input("Do you want to enter more new Stock Data? Yes or No\n"))
@@ -115,6 +126,7 @@ def lets_run():
                     if new_stock.lower() in ('yes', 'y'):
                         add_new_stock()
             elif prompt in (3, 4):
+                input('If Option 3 is selected, please make sure that data in correct format is available on multiple_trade_entry.csv file...press enter to move on\n')
                 prompt_output[prompt]()
             else:
                 break
