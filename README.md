@@ -6,8 +6,7 @@ Apart from the executables, there are two csv's -
 
 stock_initialisation.csv : This file contains the default data that was originally provided in the case. However, this can manipulated (extra data can be added) for automation, scaling and to test the functionality.
 
-multiple_trade_entry.csv: This file also helps in automation, scaling if multiple trade data for multiple tickers needs to be recorded.
-However, please note that if a ticker is not know (stock object does not exist) or commented out, its data will be ignored.
+multiple_trade_entry.csv: This file also helps in automation, scaling if multiple trade data for multiple tickers needs to be recorded. However, please note that if a ticker is not know (stock object does not exist) or commented out, its data will be ignored. examples of data entry are provided in the file but commented out.
 
 While the two csv's can be benficial, there are function in the code that can take in manual entry - trade_entry() and add_new_stock().
 
@@ -32,8 +31,6 @@ Platform:
 This code has been written to be run on a Linux platform with python 3.6.4 installed. All files should be place in the same directory/folder and the the main module to run is ssstock_main.py
 
 What to Expect:
-The code systematically provides various options from stock_analysis to data_entry to index calculation, based of the assumptions specified above. However, one can avoid going through the options and call specific functions from the command line/console to investigate/test a particular functionality.
-
-While various checks have been palced and rigorously tested for data integrity and delivery, the list may not have been exhaustive. 
+The code systematically provides various options from stock_analysis to data_entry to index calculation, based of the assumptions specified above. However, one can avoid going through the options and call specific functions from the command line/console to investigate/test a particular functionality. While various checks have been palced and rigorously tested for data integrity and delivery, the list may not have been exhaustive. 
 
 pylint score = ~7/10 for both files.
