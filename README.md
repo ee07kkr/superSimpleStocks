@@ -29,7 +29,7 @@ Assumption:
 8. Expected timestamps for the trades is in the format YYYY-mm-dd HH:MM:SS.
 
 Platform:
-This code has been written to be run on a Linux platform with python 3.6.4 installed. All files should be place in the same directory and the the main module to run is ssstock_main.py
+This code has been written to be run on a Linux platform with python 3.6.4 installed. All files should be place in the same directory/folder and the the main module to run is ssstock_main.py
 
 What to Expect:
 The code systematically provides various options from stock_analysis to data_entry to index calculation, based of the assumptions specified above. However, one can avoid going through the options and call specific functions from the command line/console to investigate/test a particular functionality.
